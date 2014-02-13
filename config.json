@@ -1,7 +1,7 @@
 {
-  "title": "Talk template",
-  "description": "My awesome talk description",
-  "author": "Tiago Garcia",
-  "email": "tgarcia@avenuecode.com",
-  "date": "Feb 11th, 2014"
+  "title": "Grunt: The Build Tool for Javascript",
+  "description": "Talk given on Avenue Code as part of UI Bootcamp",
+  "author": "Rafael Guedes",
+  "email": "rguedes@avenuecode.com",
+  "date": "Feb 13rd, 2014"
 }

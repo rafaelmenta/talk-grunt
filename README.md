@@ -1,200 +1,215 @@
-## Talk template
+## Grunt: The Build Tool for Javascript
 
-<img src="img/cover.jpg" class="logo" />
+Rafael Guedes @ [Avenue Code](http://www.avenuecode.com)
 
-Tiago Garcia @ [Avenue Code](http://www.avenuecode.com)
+*rguedes@avenuecode.com*
 
-*tgarcia@avenuecode.com*
-
-Feb 11th, 2014
+Feb 13rd, 2014
 
 ---
 
 ## Agenda
 
- - The template
-  - Installing
-  - Working
-  - Deploying
- - Your talk
-  - Organization
-  - The DO's
-  - The DONT's
-  - Tips
+ - Overview
+  - Usage
+  - Installation
+  - Setup
+ - Grunt syntax
+  - Sample Gruntfile
+ - Demo Session
+ - Conclusion
+  - Assignment
 
 ----
-
-## Agenda
-
- - Contributing
- - Learn more
- - Conclusion
- - Assignment
-
----
 
 ## Prerequisites
 
-- Markdown
-- Reveal.js
-- Grunt
+- Node
+- Node Package Manager (NPM)
 
 ---
 
-## The template
+## Overview
 
-1. The Avenue Code talk template is a responsive, web-based talk template.
-1. This template is based on [Reveal.JS](http://lab.hakim.se/reveal-js).
-1. All you need to do is to write your content in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
-1. There are some [Grunt](http://gruntjs.com) jobs to automatize the build process.
-1. It has *automatic code highlighting*, guessing the programming language you used.
-1. Once it is described in *README.md*, the talk contents will also be available as the repository description which is a common format for tutorials.
+tl;dr
+> in one word: automation
 
 ----
 
-## Setting up your repo
+## Usage
 
-1. Sign in on GitHub
-1. Fork the repository <https://github.com/acbr/talk-template>
-1. Rename it to match your talk name (ex: *talk-design-patterns*)
-1. Clone this repository
-1. Navigate to its folder on the terminal
-
-----
-
-## Building and running
-
-1. Install [Node.js](http://nodejs.org/)
-1. Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
-1. On the repo folder, install the npm dependencies
-```sh
-$ npm install
-```
-1. Build it, serve it and monitor source files for changes
-```sh
-$ grunt
-```
-1. Open <http://localhost:8000> to view your talk
+ - JS/CSS Lint
+ - Uglifying
+ - Minifying
+ - Concat static files
+ - Hot deploy
+ - Dev/Test Server
 
 ----
 
-## Working
+## Instalation
 
-1. Open up *config.json* and fill your talk data such as title, author, email, date and description.
-1. Open up *src/README.md* file and write your talk in plain *Markdown*.
-1. In order to separate slides horizontally, use 3 dashes (---).
-1. In order to separate slides vertically, use 4 dashes (----).
-1. In order to *call out attention*, put an asterisk around your text:
 ```
-In order to *call out attention*, ...
+npm install -g grunt-cli
+npm install grunt --save-dev
 ```
-1. For every change, grunt will rebuild your talk and all you need to do is to refresh your page.
+*.. and that's it :)*
+
+***
+
+#### package.json
+
+```
+"devDependencies": {
+    "grunt": "~0.4.1",
+...
+```
 
 ----
 
-## Deploying
+## Setup
 
-1. Make sure your build is not breaking.
-  - You should see *Done, without errors.* in the terminal.
-1. *git add*, *git commit* and *git push* to *gh-pages* branch.
-1. You should see your talk in an address like:
-  - http://*your-github-username*.github.io/*your-repo-name*
-  - Ex: <http://acbr.github.io/talk-template>
+ 1. Configure existing tasks
+ 2. Load needed plugins
+ 3. Create own tasks
+ 4. Define aliases and combine tasks
 
 ---
 
-## Your talk
+## Grunt syntax
 
- - Should last no more than 50 minutes, leave up to 10 minutes for questions.
- - Should not be too deep neither too superficial.
- - Give at least 3 reference links to be followed for further studies.
- - Give a challenge that would be solved using ideas that were covered on the talk.
- - It is ok to go a little bit far (forcing the attendee to do some research), but that should be optional.
+> All configuration code is done inside Gruntfile.js located at project root
 
 ----
 
-## Organization
+## Creating tasks
 
- - 1st slide: the cover, featuring your talk name, your name, the lecture date and AC logo.
- - 2nd slide: the agenda, in topics.
- - 3nd slide: the prerequisites of your talk.
- - From 4th slide on: your content
-  - When content from the same topic doesn't fit on a slide -> grow it *VERTICALLY* by adding a slide below (----).
-  - When you finish a topic and will start a different one -> grow it *HORIZONTALLY* by adding a slide to the right (---).
- - The 3 last slides: Conclusion, Learn more (with the reference links) and Challenge.
 
-----
+```javascript
+grunt.registerTask(taskName, [description, ] taskFunction)
+```
 
-## The DO's
+Ex:
+```javascript
+module.exports = function(grunt) {
+  grunt.registerTask('foo', 'My "foo" task.', function(a, b) {
+    grunt.log.writeln(this.name, a, b);
+  });
+}
+```
 
-1. *BE BALANCED BETWEEN THEORY AND PRACTICE*. Your target is keeping the subject interesting for everybody.
-1. *BE CONSISTENT*. Please watch some good screencasts in order to learn how to use your voice and conduct the talk.
-1. *BE POLITE*. Don't use slangs neither bad words.
-1. *BE OBJECTIVE*. Don't overexplain in such way you could cause confusion to your attendees.
-1. *KEEP THE FOCUS*. Off-topic discussions are ok, but only if it doesn't disturb the natural flow of your content.
-1. *BE PREPARED*. If you are going to use examples or live coding, make sure you have them all prepared beforehand.
-1. *TRAIN* your full talk at least once before your talk.
+```javascript
+$ grunt foo
+  logs: "foo", undefined, undefined
 
-----
+$ grunt foo foo:bar
+  logs: "foo", "bar", undefined
 
-## The DONT's
-
-1. *DO NEVER SHOW PRIVATE CODE FROM THE CLIENT*. This is CRITICAL and can cause serious problems.
-1. *DON'T BE ARROGANT*. Be humble and don't focus the talk on yourself.
-1. *DON'T GENERALIZE*, specially stuff that you are not sure about.
-1. *DON'T MAKE UP DATA*. Base yourself on trustable references.
-1. *DON'T BE BORING*. Just be yourself. It is ok to joke around, but don't exaggerate.
+$ grunt foo:bar:baz
+  logs: "foo", "bar", "baz"
+```
 
 ----
 
-## Tips
+## Configuring tasks
 
- - *ENJOY* your experience by creating the talk, because you will surely learn MUCH MORE than your attendees.
- - *BRING WATER* to drink while you present. You will certainly need it!
- - *BE OPEN* to receive questions and even criticism. You will learn a lot from them.
- - *ALWAYS* be polite when talking to your audience. This will always open doors for you.
- - People might come to you with questions and more complex cases after your talk. Consider it as a gift, it means you represent something good for them!
+```
+grunt.initConfig({
+  jshint: {
+    foo: {
+      src: ['app/js/a.js', 'src/aa.js']
+    },
+  },
+  concat: {
+    options: {
+      src: ['src/bb.js', 'src/bbb.js'],
+      dest: 'dest/b.js',
+    },
+  },
+  uglify : require('path/to/my/settings'),
+  ...
+```
+
+----
+
+## Configuring Tasks (cont)
+
+```javascript
+...
+watch: {
+    options: {
+      interrupt: true
+    },
+    files: [
+      'app/js/**/*.js',
+      // Exclude minified files
+      '!app/js/min/*'
+    ],
+    tasks: [
+      'jshint:foo', 'uglify', 'notify:uglify', 'concat',
+      'notify:concat', 'jdd', 'notify:jdd'
+    ]
+  }
+});
+...
+```
+
+----
+
+## Configuring Tasks (cont)
+
+```javascript
+...
+
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-notify');
+
+grunt.registerTask('default', ['jshint:foo', uglify', 'concat', 'watch']);
+...
+```
+
+Remind: packages *must* be declared in package.json
 
 ---
 
-## Contributing
-
-Should you wish to contribute, please be welcome to!
-
-1. Fork the repository <https://github.com/acbr/talk-template>
-1. Create a feature branch for your contribution
-```sh
-git checkout -b my-new-feature
-```
-1. Commit your changes
-```sh
-git commit -am 'Add some feature'
-```
-1. Push to the branch
-```sh
-git push origin my-new-feature
-```
-1. Create a Pull Request
+## Demo Session
 
 ---
 
 ## Conclusion
 
-- This talk template rocks!
-- Your life should be easier now.
+ - Powerful build tool
+ - High level of customization
+ - Leads to productivity improvements
+
+----
+
+## Assignment
+
+Create a task (you are free to set its name) with following rules:
+
+ 1. Watch for changes on you source code
+  1. In case of .css change, launch a CSS lint task
+  2. In case of .js change, launch a JS lint task
+ 3. Run uglify & minify tasks and move the result file(s) to /min/
+ 4. Notify the user that the flow is done
+
+
+**The task should FAIL if a lint rule is broken.**
+
+Submit the code on your Github account
+
+
+----
+
+## Reference
+
+*http://gruntjs.com*
 
 ---
 
-## Learn more
+## Thank you!
 
-1. [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-1. [Reveal.JS](https://github.com/hakimel/reveal.js)
-1. [Grunt](http://gruntjs.com)
+Questions?
 
----
-
-## Challenge
-
-1. Make your awesome talk based on this template.
-1. Push it to a gh-pages branch on your GitHub account.
-1. Share the URL with the world!

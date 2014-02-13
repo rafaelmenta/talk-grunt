@@ -1,11 +1,10 @@
-Grunt: The Build Tool for Javascript
-====================================
+## @@title
 
-Rafael Guedes
+@@author @ [Avenue Code](http://www.avenuecode.com)
 
-*rguedes@avenuecode.com*
+*@@email*
 
-Avenue Code - 2014
+@@date
 
 ---
 
